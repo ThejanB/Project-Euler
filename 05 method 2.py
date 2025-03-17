@@ -1,4 +1,8 @@
-numbers = list(range(1, 21))
+from time import time
+
+start = time()
+
+numbers = list(range(2, 21))
 
 # Start with the maximum value among the numbers, as the LCM cannot be less than this
 lcm = max(numbers)
@@ -15,3 +19,6 @@ while True:
         print(lcm)
         break
     lcm += max(numbers)
+
+end = time()
+print("Execution time:", end - start, "seconds")
