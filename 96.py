@@ -1,7 +1,7 @@
 from time import time
 start = time()
 
-file = open('C:/Users/DELL/Desktop/Python (Euler)/96 Project Euler.Txt','r')
+file = open('96 Project Euler.Txt','r')
 text = file.read().split('\n')
 file.close()
 
