@@ -34,4 +34,3 @@ for n in range(1, tile_limit + 1):
 
 for q in queries:
     print(answer[q])
-print(answer)
