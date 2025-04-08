@@ -1,7 +1,7 @@
 import time
 start = time.time()
 
-file = open("67 Project Euler.Txt",'r')
+file = open("067 Project Euler.Txt",'r')
 grid = file.read()
 file.close()
 

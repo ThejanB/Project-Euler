@@ -14,7 +14,7 @@ print(time()-start)
 '''
 the way to choose the range of n->
         1/3 < n/d
-        d/1 < n
+        d/3 < n
 
         n/d < 1/2
         n < d/2
