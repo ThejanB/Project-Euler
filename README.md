@@ -2,6 +2,8 @@
 
 This repository contains my solutions for [Project Euler](https://projecteuler.net/) problems and the corresponding [ProjectEuler+](https://www.hackerrank.com/contests/projecteuler/challenges) challenges on HackerRank.
 
+I solved Project Euler problems in 2020-2021 when was learning programming, but did HackerRank Problems in 2025 
+
 Each solution is tracked based on its correctness and compatibility with both platforms.
 
 ---
@@ -19,13 +21,18 @@ Each solution is tracked based on its correctness and compatibility with both pl
 
 ## 📊 Problem Status Table
 
-| Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 |
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
-| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 | Q11 | Q12 | Q13 | Q14 | Q15 | Q16 | Q17 | Q18 | Q19 | Q20 |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅| ✅ | ✅ | ✅ |
 
-| Q11 | Q12 | Q13 | Q14 | Q15 | Q16 | Q17 | Q18 | Q19 | Q20 |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅| ✅ | ✅ | ✅ |
+| Q21 | Q22 | Q23 | Q24 | Q25 | Q26 | Q27 | Q28 | Q29 | Q30 | Q31 | Q32 | Q33 | Q34 | Q35 | Q36 | Q37 | Q38 | Q39 | Q40 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅| ✅ | ✅ | ✅ | ✅ | ✅ | 🟨 | ✅ | ✅ | ✅ | ✅| ✅ | ✅ | 🟥 |
+
+| Q41 | Q42 | Q43 | Q44 | Q45 | Q46 | Q47 | Q48 | Q49 | Q50 | Q51 | Q52 | Q53 | Q54 | Q55 | Q56 | Q57 | Q58 | Q59 | Q60 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅| ✅ | 🟥 | ✅ | ✅ | ✅ | ✅ | ✅ | 🟥 | ✅ | ✅| ✅ | ✅ | ✅ |
+
 
 ---
 
