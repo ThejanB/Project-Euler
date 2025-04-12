@@ -1,7 +1,7 @@
 from time import time
 start = time()
 
-file = open("59 Project Euler.Txt","r")
+file = open("059 Project Euler.Txt","r")
 number_list = file.read().split(",")
 
 def is_valid(xor):
