@@ -1,4 +1,4 @@
-file = open("D:/Educational/project Euler/83 Project Euler.txt")
+file = open("083 Project Euler.txt")
 m = []
 for i in file.readlines():
    m.append( list( map(int, i.split(',')) ) )

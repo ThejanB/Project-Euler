@@ -1,4 +1,4 @@
-file = open("81 Project Euler.Txt")
+file = open("081 Project Euler.Txt")
 m = []
 for i in file.readlines():
     m.append( list( map(int, i.split(',')) ) )
