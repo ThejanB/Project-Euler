@@ -3,7 +3,7 @@ start = time()
 
 import math
 
-file = open("99 Project Euler.Txt",'r')
+file = open("099 Project Euler.Txt",'r')
 text = file.read()
 
 raws = text.split('\n')         # list of raws
