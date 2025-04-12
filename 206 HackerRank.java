@@ -1,117 +1,153 @@
-// 31.5%
-// 46 cases passed, others timelimit exceeded
-//
-// converted to Haskell and got 33.9% 
-// 49 cases passed, others timelimit exceeded
+// 52.7%
+// 63 cases passed, others timelimit exceeded
+
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static BigInteger sqrtFloor(BigInteger x) {
-        if (x.compareTo(BigInteger.ZERO) < 0)
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        
+        StringBuilder patternBuilder = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            patternBuilder.append(sc.next());
+        }
+        String pattern = patternBuilder.toString();
+        int L = 2 * n - 1;
+        
+        BigInteger result = solve(pattern, n, L);
+        System.out.println(result);
+    }
+    
+    private static BigInteger solve(String pattern, int n, int L) {
+        StringBuilder minSqBuilder = new StringBuilder();
+        StringBuilder maxSqBuilder = new StringBuilder();
+        
+        for (int i = 0; i < n; i++) {
+            minSqBuilder.append(pattern.charAt(i));
+            if (i < n - 1) {
+                minSqBuilder.append('0');
+            }
+            
+            maxSqBuilder.append(pattern.charAt(i));
+            if (i < n - 1) {
+                maxSqBuilder.append('9');
+            }
+        }
+        
+        BigInteger minSquare = new BigInteger(minSqBuilder.toString());
+        BigInteger maxSquare = new BigInteger(maxSqBuilder.toString());
+        
+        BigInteger lowerBound = sqrtCeil(minSquare);
+        BigInteger upperBound = sqrtFloor(maxSquare);
+        
+        int d = Math.min(n, (n >= 8) ? 4 : 3);
+        if (n <= 2) d = 1;
+        
+        int m = 2 * d - 1;
+        int modInt = (int) Math.pow(10, m);
+        BigInteger modulus = BigInteger.valueOf(modInt);
+        
+        ArrayList<Integer> validResidues = new ArrayList<>();
+        for (int r = 0; r < modInt; r++) {
+            long square = (long) r * r;
+            boolean isValid = true;
+            
+            for (int j = n - d; j < n; j++) {
+                if (j < 0) continue;
+                
+                int position = 2 * (n - 1 - j);
+                int digit = (int) ((square / (long) Math.pow(10, position)) % 10);
+                int expected = pattern.charAt(j) - '0';
+                
+                if (digit != expected) {
+                    isValid = false;
+                    break;
+                }
+            }
+            
+            if (isValid) {
+                validResidues.add(r);
+            }
+        }
+        
+        for (int residue : validResidues) {
+            BigInteger rBig = BigInteger.valueOf(residue);
+            BigInteger remainder = lowerBound.mod(modulus);
+            
+            BigInteger candidate;
+            if (remainder.compareTo(rBig) <= 0) {
+                candidate = lowerBound.subtract(remainder).add(rBig);
+            } else {
+                candidate = lowerBound.subtract(remainder).add(modulus).add(rBig);
+            }
+            
+            while (candidate.compareTo(upperBound) <= 0) {
+                BigInteger square = candidate.multiply(candidate);
+                
+                if (matches(square, pattern, L)) {
+                    return candidate;
+                }
+                
+                candidate = candidate.add(modulus);
+            }
+        }
+        
+        return BigInteger.ZERO; // Shouldn't reach here if problem has guaranteed solution
+    }
+    
+    private static boolean matches(BigInteger square, String pattern, int expectedLength) {
+        String squareStr = square.toString();
+        
+        if (squareStr.length() < expectedLength) {
+            StringBuilder padded = new StringBuilder();
+            for (int i = 0; i < expectedLength - squareStr.length(); i++) {
+                padded.append('0');
+            }
+            padded.append(squareStr);
+            squareStr = padded.toString();
+        }
+        
+        if (squareStr.length() != expectedLength) {
+            return false;
+        }
+        
+        StringBuilder extracted = new StringBuilder();
+        for (int i = 0; i < squareStr.length(); i += 2) {
+            extracted.append(squareStr.charAt(i));
+        }
+        
+        return extracted.toString().equals(pattern);
+    }
+    
+    private static BigInteger sqrtCeil(BigInteger x) {
+        BigInteger floor = sqrtFloor(x);
+        return floor.multiply(floor).equals(x) ? floor : floor.add(BigInteger.ONE);
+    }
+    
+    private static BigInteger sqrtFloor(BigInteger x) {
+        if (x.compareTo(BigInteger.ZERO) < 0) {
             throw new ArithmeticException("Negative argument");
-        if (x.equals(BigInteger.ZERO) || x.equals(BigInteger.ONE))
+        }
+        if (x.equals(BigInteger.ZERO) || x.equals(BigInteger.ONE)) {
             return x;
+        }
+        
         BigInteger two = BigInteger.valueOf(2);
         BigInteger y = x.shiftRight(x.bitLength() / 2);
+        
         while (true) {
             BigInteger z = y.add(x.divide(y)).divide(two);
             if (z.equals(y) || z.equals(y.subtract(BigInteger.ONE))) {
-                while (z.multiply(z).compareTo(x) > 0)
+                while (z.multiply(z).compareTo(x) > 0) {
                     z = z.subtract(BigInteger.ONE);
+                }
                 return z;
             }
             y = z;
         }
-    }
-
-    static BigInteger sqrtCeil(BigInteger x) {
-        BigInteger floor = sqrtFloor(x);
-        return floor.multiply(floor).equals(x) ? floor : floor.add(BigInteger.ONE);
-    }
-
-    static boolean fullMatch(BigInteger S, String pat, int len) {
-        String s = S.toString();
-        if (s.length() < len) {
-            StringBuilder pad = new StringBuilder();
-            for (int i = 0; i < len - s.length(); i++) pad.append('0');
-            pad.append(s);
-            s = pad.toString();
-        }
-        if (s.length() != len)
-            return false;
-        StringBuilder ext = new StringBuilder();
-        for (int i = 0; i < s.length(); i += 2)
-            ext.append(s.charAt(i));
-        return ext.toString().equals(pat);
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        StringBuilder patB = new StringBuilder();
-        for (int i = 0; i < n; i++)
-            patB.append(sc.next());
-        String pattern = patB.toString();
-        int L = 2 * n - 1;
-
-        StringBuilder minSB = new StringBuilder();
-        StringBuilder maxSB = new StringBuilder();
-        for (int i = 0; i < n; i++) {
-            minSB.append(pattern.charAt(i));
-            if (i < n - 1)
-                minSB.append('0');
-        }
-        for (int i = 0; i < n; i++) {
-            maxSB.append(pattern.charAt(i));
-            if (i < n - 1)
-                maxSB.append('9');
-        }
-        BigInteger minS = new BigInteger(minSB.toString());
-        BigInteger maxS = new BigInteger(maxSB.toString());
-        BigInteger lowX = sqrtCeil(minS);
-        BigInteger highX = sqrtFloor(maxS);
-
-        int d = (n >= 2) ? Math.min(n, 3) : 1;
-        int m = 2 * d - 1;
-        int modInt = (int) Math.pow(10, m);
-        BigInteger modVal = BigInteger.valueOf(modInt);
-
-        ArrayList<Integer> validResidues = new ArrayList<>();
-        for (int r = 0; r < modInt; r++) {
-            long sq = (long) r * r;
-            boolean valid = true;
-            for (int j = n - d; j < n; j++) {
-                int p = 2 * (n - 1 - j);
-                int dig = (int) ((sq / (long) Math.pow(10, p)) % 10);
-                int req = pattern.charAt(j) - '0';
-                if (dig != req) {
-                    valid = false;
-                    break;
-                }
-            }
-            if (valid)
-                validResidues.add(r);
-        }
-
-        BigInteger ans = null;
-        for (int residue : validResidues) {
-            BigInteger rBI = BigInteger.valueOf(residue);
-            BigInteger rem = lowX.mod(modVal);
-            BigInteger candidate = (rem.compareTo(rBI) <= 0) ? lowX.subtract(rem).add(rBI)
-                    : lowX.subtract(rem).add(modVal).add(rBI);
-            for (; candidate.compareTo(highX) <= 0; candidate = candidate.add(modVal)) {
-                BigInteger candidateSq = candidate.multiply(candidate);
-                if (fullMatch(candidateSq, pattern, L)) {
-                    ans = candidate;
-                    break;
-                }
-            }
-            if (ans != null)
-                break;
-        }
-        System.out.println(ans == null ? "No solution found" : ans);
     }
 }
