@@ -1,3 +1,6 @@
+# code written for HackerRank is better than this code. 
+# I think this may be now work in some cases, but worked for ProjectEuler problem. 
+
 file = open('79 Project Euler.Txt','r')
 keylogs = file.read().split('\n')
 

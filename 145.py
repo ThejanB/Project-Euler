@@ -1,17 +1,20 @@
 count = 0
 
 # 1 didit numbers - no solutions
+print(count)
 # 2 didit numbers - ab + ba
 for a in [1,3,5,7]:
     for b in [2,4,6,8]:
         if a+b > 10:break
         count += 2                  # ab,ba
+print(count)
             
 # 3 didit numbers - abc + cba  , b =[0,1,2,3,4]
 for a in [1,3,5,7,9]:
     for c in [2,4,6,8]:
         if a+c < 10:continue
         count += 2*5                # ac,ca  and  b
+print(count)
 
 # 4 didit numbers - abcd +dcba
 for a in [1,3,5,7,9]:
@@ -21,8 +24,11 @@ for a in [1,3,5,7,9]:
             for c in [0,2,4,6,8]:
                 if b+c>10:break
                 count += 2*2        # ad,da  and  bc,cb
+print(count)
 
 # 5 didit numbers - no solutions
+print(count)
+
 # 6 didit numbers - abcdef+ fedcba
 for a in [1,3,5,7,9]:
     for f in [2,4,6,8]:
@@ -34,6 +40,7 @@ for a in [1,3,5,7,9]:
                     for d in [0,2,4,6,8]:
                         if c+d>10:break
                         count += 2*2*2      # af,fa  and  be,eb and  cd,dc
+print(count)
 
 # 7 didit numbers - abcdefg + gfedcba ,d =[0,1,2,3,4]
 for a in [1,3,5,7,9]:
@@ -47,6 +54,7 @@ for a in [1,3,5,7,9]:
                     for e in [0,2,4,6,8]:
                         if c+e<10:continue
                         count += 2*2*5  #ag,ga and bf,fb and d
+print(count)
 
 # 8 didit numbers - abcdefgh + hgfedcba
 for a in [1,3,5,7,9]:
