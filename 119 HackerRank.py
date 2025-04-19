@@ -1,37 +1,32 @@
-def convert_to_base(n, base):
-    """Converts a number n to a given base and returns the digits as a list."""
-    digits = []
-    while n > 0:
-        digits.append(n % base)
-        n //= base
-    return digits[::-1]  # Reverse to get the correct order
+# 100% HackerRank
 
+import sys, math
 
-def find_interesting_numbers(base):
-    """Finds all interesting numbers below 10^100 for the given base."""
-    interesting_numbers = set()
-    limit = 10**100  # Upper limit as per problem statement
-    
-    for x in range(2, int(1e3)):  # Checking reasonable base values
-        power = 1  # Start from exponent 1
-        while True:
-            num = x ** power
-            if num >= limit:
-                break
-            if sum(convert_to_base(num, base)) == x:
-                interesting_numbers.add(num)
-            power += 1
+def sum_digits_base(N, B):
+    s = 0
+    while N:
+        s += N % B
+        N //= B
+    return s
 
-    # Sort results in ascending order
-    interesting_numbers = sorted(interesting_numbers)
-    interesting_numbers = [i for i in interesting_numbers if i > 9]
-    
-    # Print the result in the required format
-    if interesting_numbers:
-        print(" ".join(map(str, interesting_numbers)))
-    else:
-        print("No interesting numbers found.")
+def interesting_numbers(B):
+    LIMIT = 10**100
+    d_max = int(math.log(LIMIT-1, B)) + 1
+    S_max = (B-1) * d_max
 
-# Read input base B
+    interesting = set()
+    for S in range(2, S_max+1):
+        N = S * S
+        k = 2
+        while N < LIMIT:
+            if N >= B and sum_digits_base(N, B) == S:
+                interesting.add(N)
+            k += 1
+            N *= S
+
+    for x in sorted(interesting):
+        print(x, end=' ')
+    print()
+
 B = int(input().strip())
-find_interesting_numbers(B)
+interesting_numbers(B)
