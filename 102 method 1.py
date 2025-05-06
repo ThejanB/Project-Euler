@@ -1,5 +1,5 @@
     # formula of area of a triangle = | (x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2))/2 |
-    # if area(ABC) = area(OBC)+area(AOC)+area(ABO) , O lies inside the triangle
+    # method 1 -> if area(ABC) = area(OBC)+area(AOC)+area(ABO) , O lies inside the triangle
 
 def is_o_inside(x1,y1,x2,y2,x3,y3):
     total_area = abs( (x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))/2 )
